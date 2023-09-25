@@ -3,6 +3,7 @@ from .models import ProductModel, ProductReviewModel
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    reviews = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = ProductModel
