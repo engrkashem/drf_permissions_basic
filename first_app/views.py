@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from . import permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from .pagination import ProductPagination, ProductLimitOffsetPagination, ProductCursorPagination
 
 # Create your views here.
 
@@ -15,9 +16,14 @@ class ProductViewset(viewsets.ModelViewSet):
     # permission_classes = [permissions.AdminOrReadOnly]
     queryset = models.ProductModel.objects.all()
     serializer_class = serializers.ProductSerializer
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name', 'description']
-    ordering_fields = ['price']
+    # filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    # search_fields = ['name', 'description']
+    # ordering_fields = ['price']
+    # pagination_class = ProductPagination
+    # pagination_class = ProductLimitOffsetPagination
+
+    # for cursor pagination filtering should be stopped
+    pagination_class = ProductCursorPagination
 
 
 class ProductReviewViewset(viewsets.ModelViewSet):
